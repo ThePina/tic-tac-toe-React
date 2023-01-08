@@ -1,8 +1,13 @@
-.row-table{
 
-display: flex;
-flex-direction: row;
+.row-table{
+    display: flex;
+    flex-direction: row;
 }
+.table{
+    margin: 30px;
+    
+}
+
 
 .cross {
     
@@ -61,6 +66,9 @@ flex-direction: row;
 }
 
 .mark{
+    position: relative;
+   display: block;
+background: red;
+
    
-    z-index:-1;
 }

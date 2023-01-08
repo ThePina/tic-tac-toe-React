@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './TableStyle.css'
+import Swal from 'sweetalert2'
 export default function TableGame(){
     const [p1Mark]=useState('O');
     const [p2Mark]=useState('X');
     const [cpu,setCpu]=useState(false);
+    const [resetStatus,setResetStatus]=useState(false);
     const [tableGame, setTableGame] = useState([
-      ['X', 'X', 'X'],
+      ['-', '-', '-'],
       ['-', '-', '-'],
       ['-', '-', '-']
     ]);
@@ -16,7 +18,7 @@ export default function TableGame(){
     ]);
 
     function resetGame(){
-
+      window.location.reload();
     }
     function validGame(){
       console.log("check")
@@ -26,7 +28,7 @@ export default function TableGame(){
           tableGame[0][0] ===tableGame[1][1] &&
           tableGame[0][0]===tableGame[2][2]){
 
-            let copy = [...tableGame];
+            let copy = [...tableGameOver];
             copy[0][0]='x';
             copy[1][1]='x';
             copy[2][2]='x';
@@ -37,7 +39,7 @@ export default function TableGame(){
           tableGame[0][2] ===tableGame[1][1] && 
           tableGame[0][2]===tableGame[2][0]){
 
-            let copy = [...tableGame];
+            let copy = [...tableGameOver];
             copy[0][2]='x';
             copy[1][1]='x';
             copy[2][0]='x';
@@ -55,7 +57,7 @@ export default function TableGame(){
           tableGame[i][0] === tableGame[i][1] && 
           tableGame[i][0] === tableGame[i][2] ){
 
-            let copy = [...tableGame];
+            let copy = [...tableGameOver];
             copy[i][0]='x';
             copy[i][1]='x';
             copy[i][2]='x';
@@ -68,7 +70,7 @@ export default function TableGame(){
           tableGame[0][i] === tableGame[1][i] && 
           tableGame[0][i] === tableGame[2][i] ){
 
-            let copy = [...tableGame];
+            let copy = [...tableGameOver];
             copy[0][i]='x';
             copy[0][i]='x';
             copy[0][i]='x';
@@ -78,7 +80,6 @@ export default function TableGame(){
       }
       return false;
     }
-
 
     async function cpuPlay(){
       setCpu(true)
@@ -97,7 +98,15 @@ export default function TableGame(){
       setTableGame(copy)
       if(validGame()){
         //endGame
-        alert("endGame cpu Win")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'endGame cpu Win',
+          showConfirmButton: false,
+          timer: 1500
+        })
+       
+        resetGame()
 
       }else{
         setCpu(false)
@@ -118,27 +127,46 @@ export default function TableGame(){
       if(!validGame()){
         cpuPlay()
       }else{
-        alert("human win")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'endGame Human Win',
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
       }
     
       
     };
     
     return(
-      <>
-      <button onClick={()=>console.log(validGame())}>check</button>
+      <div className='tic-tac-toe-space'>
+      <button onClick={()=>resetGame()}>reset</button>
       <h1>turn</h1>
+    
       <h1>{cpu?'O':'X'}</h1>
       <h1>{cpu?"cpu":"human"}</h1>
-     { tableGame.map((row,i) =>
+      <div className='table'>
+     { !resetStatus &&(
+     tableGame.map((row,i) =>
       <div className='row-table'>
         { row.map(((col,j)=>
               <div 
                 className={'cell ' +
-                (tableGame[i][j]==="X" ? "cross" :
-                tableGame[i][j]==="O" ? "circle":
-                null)+' '+
-                (tableGameOver[i][j]==="x"?"mark":null)
+                (tableGame[i][j]==="X" ? " cross " :
+                tableGame[i][j]==="O" ? " circle ":
+                null)
+                +
+                (tableGameOver[i][j]==="x"? "mark":
+                null)
                 
               }
 
@@ -151,10 +179,11 @@ export default function TableGame(){
                 </div>
             )
         )}
+        
       </div>
-      )}
-      </>
-
-     
+      
+      ))}
+      </div>
+      </div>
     );
 }

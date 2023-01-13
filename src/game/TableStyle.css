@@ -67,8 +67,218 @@
 
 .mark{
     position: relative;
-   display: block;
-background: red;
+    display: block;
+    background: red;
 
    
 }
+.robot{
+    position: absolute;
+    left: 200px;
+}
+
+.robot-antena{
+    z-index: 1;
+    background: #000;
+    height: 50px;
+    width: 5px;
+    margin: 0 auto;
+}
+.robot-antena::after{
+    content:"";
+    z-index: 2;
+    display: flex;
+    border-radius: 30px;
+    border: 5px solid black;
+    background: white;
+    position: relative;
+    left: -10px;
+    top:-1px;
+    width: 15px;
+    height: 15px;
+}
+
+.robot-head{
+    display: block;
+    background: #fff;
+    border-radius: 2px;
+    border: 5px solid #000;
+    width: 100px;
+    height: 100px;
+
+  }
+  .robot-neck{
+    top: -5px;
+    width: 40px;
+    height: 20px;
+    margin: 0 auto;
+    background-color: white;
+    border: 5px solid black;
+    position: relative;
+
+  }
+  .robot-eyes{
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: 20%;
+    gap: 10px;
+    align-items: center;
+    justify-content: center ;
+}
+.robot-eyes-left{
+
+    width: 20px;
+    height: 20px;
+    border: 5px solid black;
+
+    
+}
+
+.robot-eyes-rigth{
+    width: 20px;
+    height: 20px;
+    border: 5px solid black;
+   
+    
+}
+.robot-mouth{
+    height: 15px;
+    margin: 15% 25px;
+    border: 5px solid #000;
+    background-color: white;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.robot-mouth::after{
+    content: "";
+    left: 66%;
+    height: 15px;
+    width:  5px;
+    background-color: black;
+    
+}
+.robot-mouth::before{
+    content: "";
+    left: 33%;
+    height: 15px;
+    width:  5px;
+    background-color: black;
+
+}
+
+/* Human */
+
+
+.human{
+    
+    position: absolute;
+    right: 200px;
+}
+.head-space{
+    height: 50px;
+}
+.human-head{
+    display: block;
+    background: #fff;
+    border-radius: 50%;
+    border: 5px solid #000;
+    width: 100px;
+    height: 100px;
+
+  }
+  .human-neck{
+    top: -5px;
+    width: 50px;
+    height: 20px;
+    margin: 0 auto;
+    background-color: white;
+    border: 5px solid black;
+    position: relative;
+    border-radius: 150px 150px 0 0;
+
+  }
+  .human-eyes{
+    position: relative;
+    
+    display: flex;
+    width: 100%;
+    margin-top: 20%;
+    gap: 10px;
+    align-items: center;
+    justify-content: center ;
+}
+.human-eyes-left{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 5px solid black;
+
+    
+}
+
+.human-eyes-rigth{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 5px solid black;
+   
+    
+}
+.human-mouth{
+    border-radius: 50%;
+    height: 15px;
+    margin: 7% 30px;
+    border: 5px solid #000;
+    background-color: white;
+    display: flex;
+    position: relative;
+    gap: 10px;
+    justify-content: center;
+}
+.human-mouth::after{
+    display: flex;
+    position: absolute;
+    content: "";
+    height: 15px;
+    width:  140%;
+    top:-7px;
+    
+    
+    background-color: white;
+    
+}
+
+.active{
+    top: 50px;
+    animation : move-active 1s normal;
+}
+
+.disabled{
+    animation : move-disabled 1s normal;
+    top: 200px;
+}
+
+@keyframes move-active {
+    from {
+        top: 200px
+       
+    }
+    to {
+        top: 50px;
+        
+     }
+}
+
+@keyframes move-disabled {
+    from {
+        top: 50px
+       
+    }
+    to {
+        top: 200px;
+        
+     }
+}
+

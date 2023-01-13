@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import './TableStyle.css'
 import Swal from 'sweetalert2'
 export default function TableGame(){
     const [p1Mark]=useState('O');
     const [p2Mark]=useState('X');
     const [cpu,setCpu]=useState(false);
-    const [resetStatus,setResetStatus]=useState(false);
     const [tableGame, setTableGame] = useState([
       ['-', '-', '-'],
       ['-', '-', '-'],
@@ -20,6 +19,10 @@ export default function TableGame(){
     function resetGame(){
       window.location.reload();
     }
+
+    
+
+
     function validGame(){
       console.log("check")
       //diagonal
@@ -99,23 +102,23 @@ export default function TableGame(){
       if(validGame()){
         //endGame
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'endGame cpu Win',
+          position: 'center',
+          icon: 'error',
+          title: 'Juego terminado',
+          text: "Has perdido",
           showConfirmButton: false,
-          timer: 1500
+          timer: 5000
+        }).then((result) => {
+          if (result.isDismissed) {
+           resetGame()
+          }
         })
        
         resetGame()
 
       }else{
         setCpu(false)
-      }
-      
-      
-     
-  
-      
+      } 
     }
 
     async function play(row,col){
@@ -128,18 +131,15 @@ export default function TableGame(){
         cpuPlay()
       }else{
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
-          title: 'endGame Human Win',
+          title: 'Juego terminado',
+          text: "Has ganado",
           showConfirmButton: false,
-          timer: 2000
+          timer: 5000
         }).then((result) => {
           if (result.isDismissed) {
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
+            resetGame()
           }
         })
       }
@@ -149,13 +149,35 @@ export default function TableGame(){
     
     return(
       <div className='tic-tac-toe-space'>
-      <button onClick={()=>resetGame()}>reset</button>
+      <div className={"robot "+(cpu?"active":"discabled")}>
+        <div className='robot-antena'></div>
+        <div className='robot-head'>
+          <div className='robot-eyes'>
+            <div className='robot-eyes-left'></div>
+            <div className='robot-eyes-rigth'></div>
+          </div>
+          <div className='robot-mouth'></div>
+        </div>
+        <div className='robot-neck'></div>
+      </div>
+
+      <div className={"human "+(cpu?"discabled":"active")}>
+        <div className='head-space'></div>
+        <div className='human-head'>
+          <div className='human-eyes'>
+            <div className='human-eyes-left'></div>
+            <div className='human-eyes-rigth'></div>
+          </div>
+          <div className='human-mouth'></div>
+        </div>
+        <div className='human-neck'></div>
+      </div>
       <h1>turn</h1>
     
       <h1>{cpu?'O':'X'}</h1>
       <h1>{cpu?"cpu":"human"}</h1>
       <div className='table'>
-     { !resetStatus &&(
+     {(
      tableGame.map((row,i) =>
       <div className='row-table'>
         { row.map(((col,j)=>

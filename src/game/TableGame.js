@@ -150,11 +150,13 @@ export default function TableGame(){
     return(
       <div className='tic-tac-toe-space'>
       <div className={"robot "+(cpu?"active":"discabled")}>
-        <div className='robot-antena'></div>
+        
+      <div className="robot-antena"></div>
+      <div className={(cpu?"pulse":"none")}></div>
         <div className='robot-head'>
           <div className='robot-eyes'>
-            <div className='robot-eyes-left'></div>
-            <div className='robot-eyes-rigth'></div>
+            <div className={'robot-eyes-left '+(cpu?"robot-eyes-active":null)}></div>
+            <div className={'robot-eyes-rigth '+(cpu?"robot-eyes-active":null)}></div>
           </div>
           <div className='robot-mouth'></div>
         </div>
@@ -162,7 +164,13 @@ export default function TableGame(){
       </div>
 
       <div className={"human "+(cpu?"discabled":"active")}>
-        <div className='head-space'></div>
+        <div className='head-space'>
+          {!cpu&&
+          <div className='speech-bubble'>
+            <span className='thinking'>&#63;</span>
+          </div>
+          }
+        </div>
         <div className='human-head'>
           <div className='human-eyes'>
             <div className='human-eyes-left'></div>

@@ -1,4 +1,11 @@
+:root{
+    --robot-color: gray;
+    --robot-eyes:white;
 
+    --human-color: rgb(236, 222, 25);
+    --human-eyes: white;
+    
+}
 .row-table{
     display: flex;
     flex-direction: row;
@@ -73,12 +80,13 @@
    
 }
 .robot{
+    margin-top: 30px;
     position: absolute;
     left: 200px;
 }
 
 .robot-antena{
-    z-index: 1;
+    
     background: #000;
     height: 50px;
     width: 5px;
@@ -90,7 +98,7 @@
     display: flex;
     border-radius: 30px;
     border: 5px solid black;
-    background: white;
+    background: var(--robot-color);
     position: relative;
     left: -10px;
     top:-1px;
@@ -100,7 +108,7 @@
 
 .robot-head{
     display: block;
-    background: #fff;
+    background: var(--robot-color);
     border-radius: 2px;
     border: 5px solid #000;
     width: 100px;
@@ -112,7 +120,7 @@
     width: 40px;
     height: 20px;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--robot-color);
     border: 5px solid black;
     position: relative;
 
@@ -131,6 +139,8 @@
     width: 20px;
     height: 20px;
     border: 5px solid black;
+    background-color: var(--robot-eyes);
+
 
     
 }
@@ -139,14 +149,18 @@
     width: 20px;
     height: 20px;
     border: 5px solid black;
-   
+    background-color: var(--robot-eyes);
     
+}
+
+.robot-eyes-active{
+    animation: rainbow 0.5s infinite ;
 }
 .robot-mouth{
     height: 15px;
     margin: 15% 25px;
     border: 5px solid #000;
-    background-color: white;
+    background-color: var(--robot-eyes);
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -172,16 +186,41 @@
 
 
 .human{
-    
+    margin-top: 30px;
     position: absolute;
     right: 200px;
 }
 .head-space{
+    position: relative;
+
     height: 50px;
+    width: 100%;
 }
+.thinking{
+   position: absolute;
+    color: rgb(0, 0, 0);
+   font-size: 2.5em;
+   left:25px;
+   top:-12px;
+   font-weight: 700;
+
+   
+}
+.speech-bubble{
+    z-index: 3;
+    left: -70px;
+    position: relative;
+    height: 60px;
+    width: 70px;
+    border-radius: 30px 30px 0 30px;
+    border: 5px solid black;
+    background-color: white;
+    animation: breath 1s infinite;
+}
+
 .human-head{
     display: block;
-    background: #fff;
+    background: var(--human-color);
     border-radius: 50%;
     border: 5px solid #000;
     width: 100px;
@@ -193,7 +232,7 @@
     width: 50px;
     height: 20px;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--human-color);
     border: 5px solid black;
     position: relative;
     border-radius: 150px 150px 0 0;
@@ -201,7 +240,7 @@
   }
   .human-eyes{
     position: relative;
-    
+  
     display: flex;
     width: 100%;
     margin-top: 20%;
@@ -210,15 +249,19 @@
     justify-content: center ;
 }
 .human-eyes-left{
+    background-color: var(--human-eyes);
     border-radius: 50%;
     width: 20px;
     height: 20px;
+   
     border: 5px solid black;
+
 
     
 }
 
 .human-eyes-rigth{
+    background-color: var(--human-eyes);
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -231,7 +274,7 @@
     height: 15px;
     margin: 7% 30px;
     border: 5px solid #000;
-    background-color: white;
+    background-color: var(--human-color);
     display: flex;
     position: relative;
     gap: 10px;
@@ -244,41 +287,82 @@
     height: 15px;
     width:  140%;
     top:-7px;
-    
-    
-    background-color: white;
+    background-color: var(--human-color);
     
 }
 
-.active{
-    top: 50px;
-    animation : move-active 1s normal;
-}
+.pulse {
+    z-index: 1;
+    background: red;
+    border-radius: 500px;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    margin-top: -49px;
+    margin-left: 45px;
+    animation: pulse 0.5s infinite ease-in-out;
+  }
 
-.disabled{
-    animation : move-disabled 1s normal;
-    top: 200px;
-}
-
-@keyframes move-active {
-    from {
-        top: 200px
-       
-    }
-    to {
-        top: 50px;
-        
-     }
-}
-
-@keyframes move-disabled {
-    from {
-        top: 50px
-       
-    }
-    to {
-        top: 200px;
-        
-     }
+  @keyframes breath {
+    0%,100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    
+      50% {
+        transform: scale(1.3);
+        opacity: 1;
+      }
+  }
+    @keyframes pulse {
+        from {
+          background: #663399;
+          transform: scale(1);
+          opacity: 1;
+        }
+        to {
+          background: #fff;
+          transform: scale(3);
+          opacity: 0;
+        }
+      }
+    
+      @keyframes rainbow{
+		100%,0%{
+			background-color: rgb(255,0,0);
+		}
+		8%{
+			background-color: rgb(255,127,0);
+		}
+		16%{
+			background-color: rgb(255,255,0);
+		}
+		25%{
+			background-color: rgb(127,255,0);
+		}
+		33%{
+			background-color: rgb(0,255,0);
+		}
+		41%{
+			background-color: rgb(0,255,127);
+		}
+		50%{
+			background-color: rgb(0,255,255);
+		}
+		58%{
+			background-color: rgb(0,127,255);
+		}
+		66%{
+			background-color: rgb(0,0,255);
+		}
+		75%{
+			background-color: rgb(127,0,255);
+		}
+		83%{
+			background-color: rgb(255,0,255);
+		}
+		91%{
+			background-color: rgb(255,0,127);
+		}
 }
 

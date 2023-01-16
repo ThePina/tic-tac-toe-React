@@ -11,13 +11,28 @@
     flex-direction: row;
 }
 .table{
+    grid-area: game;
     margin: 30px;
-    
+}
+
+.grid-tic-tac-toe{
+    display: grid;
+    grid-template-areas: 
+            "human . robot"
+            ". game ."     
+}
+
+@media (max-width: 576px) {
+    .grid-tic-tac-toe{
+        display: grid;
+        grid-template-areas: 
+                ". human robot ."
+                ". game game ."     
+    }
 }
 
 
 .cross {
-    
     width: 100px;
     height: 100px;
    
@@ -80,8 +95,8 @@
    
 }
 .robot{
+    grid-area: robot;
     margin-top: 30px;
-    position: absolute;
     left: 200px;
 }
 
@@ -186,8 +201,8 @@
 
 
 .human{
+    grid-area: human;
     margin-top: 30px;
-    position: absolute;
     right: 200px;
 }
 .head-space{

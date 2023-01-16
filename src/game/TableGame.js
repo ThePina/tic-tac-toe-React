@@ -148,7 +148,8 @@ export default function TableGame(){
     };
     
     return(
-      <div className='tic-tac-toe-space'>
+      <div className='grid-tic-tac-toe'>
+
       <div className={"robot "+(cpu?"active":"discabled")}>
         
       <div className="robot-antena"></div>
@@ -162,7 +163,6 @@ export default function TableGame(){
         </div>
         <div className='robot-neck'></div>
       </div>
-
       <div className={"human "+(cpu?"discabled":"active")}>
         <div className='head-space'>
           {!cpu&&
@@ -180,10 +180,6 @@ export default function TableGame(){
         </div>
         <div className='human-neck'></div>
       </div>
-      <h1>turn</h1>
-    
-      <h1>{cpu?'O':'X'}</h1>
-      <h1>{cpu?"cpu":"human"}</h1>
       <div className='table'>
      {(
      tableGame.map((row,i) =>
